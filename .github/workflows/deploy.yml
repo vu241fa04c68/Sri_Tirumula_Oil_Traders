@@ -33,6 +33,7 @@ jobs:
       - name: Export web static files
         run: |
           npx expo export -p web
+          touch dist/.nojekyll
           cp dist/index.html dist/404.html
 
       - name: Upload Pages artifact
