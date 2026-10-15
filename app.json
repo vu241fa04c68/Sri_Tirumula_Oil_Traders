@@ -32,6 +32,9 @@
     "plugins": [
       "expo-router"
     ],
-    "scheme": "sritirumala"
+    "scheme": "sritirumala",
+    "experiments": {
+      "baseUrl": "/Sri_Tirumula_Oil_Traders"
+    }
   }
 }
