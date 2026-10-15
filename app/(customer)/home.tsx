@@ -128,11 +128,12 @@ export default function CustomerHomeScreen() {
           </Text>
         </View>
 
-        <View style={styles.gridContainer}>
+        <View style={styles.verticalListContainer}>
           {featuredProducts.map(prod => (
             <ProductCard
               key={prod.id}
               product={prod}
+              horizontal
               onPress={() => router.push(`/(customer)/product/${prod.id}`)}
             />
           ))}
@@ -201,6 +202,9 @@ const styles = StyleSheet.create({
   scrollContent: {
     padding: SPACING.md,
     paddingBottom: 90,
+    width: '100%',
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   searchBar: {
     flexDirection: 'row',
@@ -301,6 +305,10 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     marginHorizontal: -SPACING.xs,
   },
+  verticalListContainer: {
+    width: '100%',
+    marginBottom: SPACING.sm,
+  },
   callShopCard: {
     backgroundColor: COLORS.surface,
     borderRadius: 16,
@@ -337,6 +345,8 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: COLORS.border,
     elevation: 8,
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   bottomTab: {
     flex: 1,

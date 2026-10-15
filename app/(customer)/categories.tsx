@@ -72,11 +72,12 @@ export default function CategoriesScreen() {
             <Text style={styles.emptyText}>No products found in this category.</Text>
           </View>
         ) : (
-          <View style={styles.gridContainer}>
+          <View style={styles.verticalListContainer}>
             {products.map(prod => (
               <ProductCard
                 key={prod.id}
                 product={prod}
+                horizontal
                 onPress={() => router.push(`/(customer)/product/${prod.id}`)}
               />
             ))}
@@ -98,6 +99,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: COLORS.border,
     paddingHorizontal: SPACING.sm,
+    width: '100%',
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   tab: {
     paddingHorizontal: SPACING.md,
@@ -120,11 +124,17 @@ const styles = StyleSheet.create({
   },
   productList: {
     padding: SPACING.md,
+    width: '100%',
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   gridContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginHorizontal: -SPACING.xs,
+  },
+  verticalListContainer: {
+    width: '100%',
   },
   emptyContainer: {
     alignItems: 'center',

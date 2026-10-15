@@ -703,6 +703,9 @@ const styles = StyleSheet.create({
     padding: SPACING.xs,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.border,
+    width: '100%',
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   filterTab: {
     flex: 1,
@@ -724,6 +727,9 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: SPACING.md,
+    width: '100%',
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   emptyContainer: {
     alignItems: 'center',

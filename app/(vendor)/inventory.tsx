@@ -130,6 +130,9 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: SPACING.md,
+    width: '100%',
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   sectionHeader: {
     fontSize: 16,

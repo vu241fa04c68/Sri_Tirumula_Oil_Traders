@@ -450,6 +450,9 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: SPACING.lg,
+    width: '100%',
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   card: {
     backgroundColor: COLORS.surface,
@@ -596,6 +599,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.5)',
     justifyContent: 'center',
+    alignItems: 'center',
     padding: SPACING.lg,
   },
   modalContent: {
@@ -604,6 +608,8 @@ const styles = StyleSheet.create({
     padding: SPACING.xl,
     elevation: 10,
     maxHeight: '90%',
+    width: '100%',
+    maxWidth: 480,
   },
   modalHeader: {
     flexDirection: 'row',

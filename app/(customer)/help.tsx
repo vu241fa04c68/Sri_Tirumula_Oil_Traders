@@ -50,6 +50,9 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: SPACING.md,
+    width: '100%',
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   card: {
     backgroundColor: COLORS.surface,

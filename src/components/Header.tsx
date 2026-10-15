@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { COLORS, SPACING, SHOP_METADATA } from '../constants/theme';
@@ -93,7 +93,7 @@ export const Header: React.FC<HeaderProps> = ({ title, showBack = false }) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.primary,
-    paddingTop: 45,
+    paddingTop: Platform.OS === 'web' ? SPACING.md : 45,
     paddingBottom: SPACING.sm,
     paddingHorizontal: SPACING.md,
     borderBottomLeftRadius: 16,
@@ -108,11 +108,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    width: '100%',
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   leftSection: {
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
+
   },
   brandIconContainer: {
     width: 38,

@@ -248,7 +248,10 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: SPACING.md,
-    paddingBottom: 90,
+    paddingBottom: 95,
+    width: '100%',
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   card: {
     backgroundColor: COLORS.surface,
@@ -347,6 +350,8 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: COLORS.border,
     elevation: 10,
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   footerLabel: {
     fontSize: 11,

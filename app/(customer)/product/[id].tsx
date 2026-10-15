@@ -164,7 +164,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   scrollContent: {
-    paddingBottom: 90,
+    paddingBottom: 95,
+    width: '100%',
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   imageContainer: {
     height: 240,
@@ -306,6 +309,8 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: COLORS.border,
     elevation: 10,
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   footerPriceCol: {},
   footerTotalLabel: {

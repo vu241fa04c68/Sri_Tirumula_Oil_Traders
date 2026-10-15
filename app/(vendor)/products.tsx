@@ -142,6 +142,9 @@ const styles = StyleSheet.create({
     padding: SPACING.md,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.border,
+    width: '100%',
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   countText: {
     fontSize: 14,
@@ -163,6 +166,9 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: SPACING.md,
+    width: '100%',
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   productCard: {
     flexDirection: 'row',

@@ -382,6 +382,18 @@ const styles = StyleSheet.create({
   content: {
     padding: SPACING.xl,
     alignItems: 'center',
+    width: '100%',
+    maxWidth: 480,
+    alignSelf: 'center',
+    backgroundColor: COLORS.surface,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+    elevation: 3,
   },
   securityBadge: {
     width: 90,
@@ -497,6 +509,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.5)',
     justifyContent: 'center',
+    alignItems: 'center',
     padding: SPACING.lg,
   },
   modalContent: {
@@ -505,6 +518,8 @@ const styles = StyleSheet.create({
     padding: SPACING.xl,
     elevation: 10,
     maxHeight: '90%',
+    width: '100%',
+    maxWidth: 480,
   },
   modalHeader: {
     flexDirection: 'row',

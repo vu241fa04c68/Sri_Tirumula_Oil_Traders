@@ -23,77 +23,79 @@ export default function EntryScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        {/* Brand Banner Header */}
-        <View style={styles.brandHero}>
-          <View style={styles.logoBadge}>
-            <Ionicons name="storefront" size={54} color={COLORS.accent} />
+        <View style={styles.innerWrapper}>
+          {/* Brand Banner Header */}
+          <View style={styles.brandHero}>
+            <View style={styles.logoBadge}>
+              <Ionicons name="storefront" size={54} color={COLORS.accent} />
+            </View>
+            <Text style={styles.shopTitle}>
+              {language === 'te' ? SHOP_METADATA.nameTe : SHOP_METADATA.nameEn}
+            </Text>
+            <Text style={styles.shopSubtext}>{t('shopTagline')}</Text>
+
+            <View style={styles.contactChip}>
+              <Ionicons name="call" size={14} color={COLORS.surface} style={{ marginRight: 6 }} />
+              <Text style={styles.contactChipText}>{SHOP_METADATA.phone}</Text>
+            </View>
           </View>
-          <Text style={styles.shopTitle}>
-            {language === 'te' ? SHOP_METADATA.nameTe : SHOP_METADATA.nameEn}
-          </Text>
-          <Text style={styles.shopSubtext}>{t('shopTagline')}</Text>
 
-          <View style={styles.contactChip}>
-            <Ionicons name="call" size={14} color={COLORS.surface} style={{ marginRight: 6 }} />
-            <Text style={styles.contactChipText}>{SHOP_METADATA.phone}</Text>
+          {/* Language Selection Card */}
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>{t('selectLanguage')}</Text>
+            <Text style={styles.cardSubtitle}>Choose your preferred language / అనుకూలమైన భాషను ఎంచుకోండి</Text>
+
+            <View style={styles.langToggleRow}>
+              <TouchableOpacity
+                style={[styles.langChoice, language === 'en' && styles.activeLangChoice]}
+                onPress={() => setLanguage('en')}
+              >
+                <Ionicons
+                  name={language === 'en' ? 'checkmark-circle' : 'ellipse-outline'}
+                  size={22}
+                  color={language === 'en' ? COLORS.primary : COLORS.textMuted}
+                />
+                <Text style={[styles.langChoiceText, language === 'en' && styles.activeLangText]}>
+                  {t('english')}
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={[styles.langChoice, language === 'te' && styles.activeLangChoice]}
+                onPress={() => setLanguage('te')}
+              >
+                <Ionicons
+                  name={language === 'te' ? 'checkmark-circle' : 'ellipse-outline'}
+                  size={22}
+                  color={language === 'te' ? COLORS.primary : COLORS.textMuted}
+                />
+                <Text style={[styles.langChoiceText, language === 'te' && styles.activeLangText]}>
+                  {t('telugu')}
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
 
-        {/* Language Selection Card */}
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>{t('selectLanguage')}</Text>
-          <Text style={styles.cardSubtitle}>Choose your preferred language / అనుకూలమైన భాషను ఎంచుకోండి</Text>
-
-          <View style={styles.langToggleRow}>
-            <TouchableOpacity
-              style={[styles.langChoice, language === 'en' && styles.activeLangChoice]}
-              onPress={() => setLanguage('en')}
-            >
-              <Ionicons
-                name={language === 'en' ? 'checkmark-circle' : 'ellipse-outline'}
-                size={22}
-                color={language === 'en' ? COLORS.primary : COLORS.textMuted}
-              />
-              <Text style={[styles.langChoiceText, language === 'en' && styles.activeLangText]}>
-                {t('english')}
-              </Text>
+          {/* Entry Actions */}
+          <View style={styles.actionContainer}>
+            <TouchableOpacity style={styles.primaryBtn} onPress={handleStartCustomer} activeOpacity={0.88}>
+              <Ionicons name="cart" size={22} color={COLORS.surface} style={{ marginRight: 10 }} />
+              <Text style={styles.primaryBtnText}>{t('startShopping')}</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              style={[styles.langChoice, language === 'te' && styles.activeLangChoice]}
-              onPress={() => setLanguage('te')}
-            >
-              <Ionicons
-                name={language === 'te' ? 'checkmark-circle' : 'ellipse-outline'}
-                size={22}
-                color={language === 'te' ? COLORS.primary : COLORS.textMuted}
-              />
-              <Text style={[styles.langChoiceText, language === 'te' && styles.activeLangText]}>
-                {t('telugu')}
-              </Text>
+            <TouchableOpacity style={styles.secondaryBtn} onPress={handleStartVendor} activeOpacity={0.85}>
+              <Ionicons name="shield-checkmark" size={20} color={COLORS.primary} style={{ marginRight: 8 }} />
+              <Text style={styles.secondaryBtnText}>{t('vendorPortal')}</Text>
             </TouchableOpacity>
           </View>
-        </View>
 
-        {/* Entry Actions */}
-        <View style={styles.actionContainer}>
-          <TouchableOpacity style={styles.primaryBtn} onPress={handleStartCustomer} activeOpacity={0.88}>
-            <Ionicons name="cart" size={22} color={COLORS.surface} style={{ marginRight: 10 }} />
-            <Text style={styles.primaryBtnText}>{t('startShopping')}</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.secondaryBtn} onPress={handleStartVendor} activeOpacity={0.85}>
-            <Ionicons name="shield-checkmark" size={20} color={COLORS.primary} style={{ marginRight: 8 }} />
-            <Text style={styles.secondaryBtnText}>{t('vendorPortal')}</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Footer Guarantee */}
-        <View style={styles.footerInfo}>
-          <Ionicons name="shield-checkmark-outline" size={18} color={COLORS.success} />
-          <Text style={styles.footerInfoText}>
-            100% Pure & Authentic Local Kirana • Fast Home Delivery
-          </Text>
+          {/* Footer Guarantee */}
+          <View style={styles.footerInfo}>
+            <Ionicons name="shield-checkmark-outline" size={18} color={COLORS.success} />
+            <Text style={styles.footerInfoText}>
+              100% Pure & Authentic Local Kirana • Fast Home Delivery
+            </Text>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -110,6 +112,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: '100%',
+  },
+  innerWrapper: {
+    width: '100%',
+    maxWidth: 500,
+    alignItems: 'center',
   },
   brandHero: {
     alignItems: 'center',

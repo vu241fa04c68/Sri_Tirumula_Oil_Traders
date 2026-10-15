@@ -50,11 +50,12 @@ export default function SearchScreen() {
             <Text style={styles.emptySub}>Try searching for "Rice", "Oil", "పసుపు", or "పచ్చడి"</Text>
           </View>
         ) : (
-          <View style={styles.gridContainer}>
+          <View style={styles.verticalListContainer}>
             {results.map(prod => (
               <ProductCard
                 key={prod.id}
                 product={prod}
+                horizontal
                 onPress={() => router.push(`/(customer)/product/${prod.id}`)}
               />
             ))}
@@ -85,6 +86,9 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderWidth: 1,
     borderColor: COLORS.border,
+    width: '100%',
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   searchInput: {
     flex: 1,
@@ -94,11 +98,17 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: SPACING.md,
+    width: '100%',
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   gridContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginHorizontal: -SPACING.xs,
+  },
+  verticalListContainer: {
+    width: '100%',
   },
   emptyState: {
     alignItems: 'center',

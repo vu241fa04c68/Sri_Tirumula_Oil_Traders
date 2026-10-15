@@ -35,10 +35,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onPress, hori
 
   if (horizontal) {
     return (
-      <TouchableOpacity style={styles.cardHorizontal} onPress={onPress} activeOpacity={0.85}>
-        <Image source={{ uri: product.image }} style={styles.imageHorizontal} resizeMode="cover" />
+      <TouchableOpacity style={styles.cardHorizontal} onPress={onPress} activeOpacity={0.88}>
+        <View style={styles.imageHorizontalWrapper}>
+          <Image source={{ uri: product.image }} style={styles.imageHorizontal} resizeMode="cover" />
+          {hasDiscount && (
+            <View style={styles.discountBadgeSmall}>
+              <Text style={styles.discountTextSmall}>
+                SAVE ₹{product.price - (product.discountPrice || 0)}
+              </Text>
+            </View>
+          )}
+        </View>
+
         <View style={styles.detailsHorizontal}>
-          <Text style={styles.title} numberOfLines={1}>
+          <Text style={styles.title} numberOfLines={2}>
             {title}
           </Text>
           <Text style={styles.secondaryTitle} numberOfLines={1}>
@@ -53,11 +63,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onPress, hori
         </View>
 
         <TouchableOpacity
-          style={[styles.addBtn, product.stock <= 0 && styles.disabledBtn]}
+          style={[styles.addBtnHorizontal, product.stock <= 0 && styles.disabledBtn]}
           onPress={handleAddToCart}
           disabled={product.stock <= 0}
         >
-          <Ionicons name="add" size={20} color={COLORS.surface} />
+          <Ionicons name="add" size={16} color={COLORS.surface} />
+          <Text style={styles.addBtnHorizontalText}>
+            {product.stock <= 0 ? t('outOfStock') : t('addToCart')}
+          </Text>
         </TouchableOpacity>
       </TouchableOpacity>
     );
@@ -129,11 +142,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: 3,
     flex: 1,
+    minWidth: 150,
+    maxWidth: 360,
     marginHorizontal: SPACING.xs,
   },
   imageWrapper: {
     position: 'relative',
-    height: 130,
+    height: 140,
     backgroundColor: COLORS.borderLight,
   },
   imageGrid: {
@@ -235,27 +250,73 @@ const styles = StyleSheet.create({
   cardHorizontal: {
     flexDirection: 'row',
     backgroundColor: COLORS.cardBg,
-    borderRadius: 12,
+    borderRadius: 14,
     borderWidth: 1,
     borderColor: COLORS.border,
-    padding: SPACING.xs,
+    padding: SPACING.sm,
     marginBottom: SPACING.sm,
     alignItems: 'center',
+    width: '100%',
+    maxWidth: 768,
+    alignSelf: 'center',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.08,
+    shadowRadius: 3,
+  },
+  imageHorizontalWrapper: {
+    position: 'relative',
+    width: 80,
+    height: 80,
+    borderRadius: 10,
+    overflow: 'hidden',
+    backgroundColor: COLORS.borderLight,
   },
   imageHorizontal: {
-    width: 75,
-    height: 75,
-    borderRadius: 8,
-    backgroundColor: COLORS.borderLight,
+    width: '100%',
+    height: '100%',
+  },
+  discountBadgeSmall: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: COLORS.primary,
+    paddingVertical: 2,
+    alignItems: 'center',
+  },
+  discountTextSmall: {
+    color: COLORS.surface,
+    fontSize: 8,
+    fontWeight: '800',
   },
   detailsHorizontal: {
     flex: 1,
-    marginLeft: SPACING.sm,
+    marginLeft: SPACING.md,
+    marginRight: SPACING.xs,
   },
   priceRow: {
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 4,
+    gap: 6,
+  },
+  addBtnHorizontal: {
+    backgroundColor: COLORS.primary,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    elevation: 1,
+  },
+  addBtnHorizontalText: {
+    color: COLORS.surface,
+    fontSize: 11,
+    fontWeight: '700',
+    marginLeft: 3,
   },
   addBtn: {
     backgroundColor: COLORS.primary,

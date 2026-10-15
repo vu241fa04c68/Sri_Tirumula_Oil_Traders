@@ -144,28 +144,25 @@ export default function EditProductScreen() {
           <TextInput style={styles.input} value={nameTe} onChangeText={setNameTe} />
         </View>
 
-        <View style={styles.inputRow}>
-          <View style={[styles.inputGroup, { flex: 1, marginRight: 8 }]}>
-            <Text style={styles.label}>{t('priceLabel')}</Text>
-            <TextInput style={styles.input} value={price} onChangeText={setPrice} keyboardType="numeric" />
-          </View>
-
-          <View style={[styles.inputGroup, { flex: 1 }]}>
-            <Text style={styles.label}>Discount Price</Text>
-            <TextInput style={styles.input} value={discountPrice} onChangeText={setDiscountPrice} keyboardType="numeric" />
-          </View>
+        {/* Prices & Units (Vertical Stack) */}
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>{t('priceLabel')} (₹)</Text>
+          <TextInput style={styles.input} value={price} onChangeText={setPrice} keyboardType="numeric" />
         </View>
 
-        <View style={styles.inputRow}>
-          <View style={[styles.inputGroup, { flex: 1, marginRight: 8 }]}>
-            <Text style={styles.label}>{t('stockLabel')}</Text>
-            <TextInput style={styles.input} value={stock} onChangeText={setStock} keyboardType="number-pad" />
-          </View>
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>Discount Price (Optional) (₹)</Text>
+          <TextInput style={styles.input} value={discountPrice} onChangeText={setDiscountPrice} keyboardType="numeric" />
+        </View>
 
-          <View style={[styles.inputGroup, { flex: 1 }]}>
-            <Text style={styles.label}>{t('unit')}</Text>
-            <TextInput style={styles.input} value={unit} onChangeText={setUnit} />
-          </View>
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>{t('stockLabel')} (Available Units)</Text>
+          <TextInput style={styles.input} value={stock} onChangeText={setStock} keyboardType="number-pad" />
+        </View>
+
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>{t('unit')} (e.g. 1 Litre Pouch, 1 kg, 1 Piece)</Text>
+          <TextInput style={styles.input} value={unit} onChangeText={setUnit} />
         </View>
 
         <View style={styles.switchRow}>
@@ -201,6 +198,9 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: SPACING.lg,
+    width: '100%',
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   inputGroup: {
     marginBottom: SPACING.md,

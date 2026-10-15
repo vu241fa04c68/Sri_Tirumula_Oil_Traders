@@ -277,6 +277,9 @@ const styles = StyleSheet.create({
   scrollContent: {
     padding: SPACING.md,
     paddingBottom: 40,
+    width: '100%',
+    maxWidth: 768,
+    alignSelf: 'center',
   },
   storeCard: {
     backgroundColor: COLORS.primaryDark,
@@ -475,6 +478,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.5)',
     justifyContent: 'center',
+    alignItems: 'center',
     padding: SPACING.lg,
   },
   modalContent: {
@@ -482,6 +486,8 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: SPACING.xl,
     elevation: 10,
+    width: '100%',
+    maxWidth: 480,
   },
   modalHeader: {
     flexDirection: 'row',

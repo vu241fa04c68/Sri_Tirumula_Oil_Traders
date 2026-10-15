@@ -50,6 +50,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
+    width: '100%',
+    maxWidth: 480,
+    alignSelf: 'center',
   },
   iconCircle: {
     width: 90,
