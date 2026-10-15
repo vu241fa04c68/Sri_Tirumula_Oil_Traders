@@ -49,27 +49,25 @@ export default function VendorLoginScreen() {
   };
 
   const handleVendorLogin = async () => {
+    if (!phone.trim() || !password.trim()) {
+      const msg = 'Please enter both phone number and password.';
+      if (Platform.OS === 'web') alert(msg);
+      else Alert.alert(t('error'), msg);
+      return;
+    }
+
     setIsLoading(true);
-    const targetPhone = phone.trim() || SHOP_METADATA.phone;
-    const targetPass = password.trim() || '492006';
-    const res = await loginVendor(targetPhone, targetPass);
+    const res = await loginVendor(phone.trim(), password.trim());
     setIsLoading(false);
 
     if (res.success) {
       router.replace('/(vendor)/dashboard');
     } else {
-      // Auto fallback to store owner account
-      const fallbackRes = await loginVendor(SHOP_METADATA.phone, '492006');
-      if (fallbackRes.success) {
-        router.replace('/(vendor)/dashboard');
-      } else {
-        const msg = res.message || 'Invalid shop owner credentials.';
-        if (Platform.OS === 'web') alert('Access Denied:\n' + msg);
-        else Alert.alert('Access Denied', msg);
-      }
+      const msg = res.message || 'Access Denied: Invalid credentials. Only authorized store owners can log in.';
+      if (Platform.OS === 'web') alert(msg);
+      else Alert.alert('Access Denied', msg);
     }
   };
-
 
   const handleSendOTP = async () => {
     setIsSendingOtp(true);
@@ -100,16 +98,10 @@ export default function VendorLoginScreen() {
     // Check if OTP was used or Previous Password was used
     const isUsingOTP = otpSent && (otpCode.trim() === activeDemoOtp || otpCode.trim() === '800841');
 
-    const isPrevValid =
-      cleanPrev === '492006' ||
-      cleanPrev === activeConfig.password.trim() ||
-      cleanPrev === 'admin8008413774' ||
-      cleanPrev === 'admin' ||
-      cleanPrev === activeConfig.phone.trim() ||
-      cleanPrev.length >= 4;
+    const isPrevValid = cleanPrev === activeConfig.password.trim() || cleanPrev === '492006';
 
     if (!cleanPrev && !isUsingOTP) {
-      const msg = 'Please enter your previous admin password (492006) or use OTP.';
+      const msg = 'Please enter your previous admin password.';
       setModalMessage({ type: 'error', text: msg });
       if (Platform.OS === 'web') alert(msg);
       return;
@@ -117,7 +109,7 @@ export default function VendorLoginScreen() {
 
     // If not using valid OTP, verify previous password
     if (!isUsingOTP && !isPrevValid) {
-      const msg = '❌ Incorrect Previous Password. Enter your previous password "492006" or reset via OTP.';
+      const msg = '❌ Incorrect Previous Password. Please enter your valid previous admin password.';
       setModalMessage({ type: 'error', text: msg });
       if (Platform.OS === 'web') alert(msg);
       return;

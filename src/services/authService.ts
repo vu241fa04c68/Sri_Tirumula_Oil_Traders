@@ -84,19 +84,12 @@ export const authService = {
     const cleanOld = (oldPasswordInput || '').trim();
     const cleanNew = (newPasswordInput || '').trim();
 
-    const isOldValid =
-      cleanOld === '492006' ||
-      cleanOld === activeConfig.password.trim() ||
-      cleanOld === DEFAULT_VENDOR_CREDENTIALS.password ||
-      cleanOld === 'admin' ||
-      cleanOld === '8008413774' ||
-      cleanOld === 'admin8008413774' ||
-      cleanOld.length >= 4;
+    const isOldValid = cleanOld === activeConfig.password.trim() || cleanOld === '492006';
 
     if (!cleanOld || !isOldValid) {
       return {
         success: false,
-        message: 'Incorrect previous password. Please enter previous password "492006".',
+        message: 'Incorrect previous password. Please enter your valid previous password.',
       };
     }
 
@@ -115,7 +108,7 @@ export const authService = {
     if (updated) {
       return {
         success: true,
-        message: `Password changed successfully to "${cleanNew}"!`,
+        message: `Password changed successfully!`,
       };
     }
 
@@ -125,7 +118,7 @@ export const authService = {
     };
   },
 
-  // Safe & Flexible Vendor Authentication Guard
+  // Strict Vendor Authentication Guard
   loginVendor: async (phoneInput: string, passwordInput: string): Promise<{ success: boolean; profile?: UserProfile; message?: string }> => {
     const activeConfig = await authService.getVendorCredentials();
 
@@ -135,23 +128,13 @@ export const authService = {
     const last10Input = cleanInputPhone.slice(-10);
     const last10Config = cleanConfigPhone.slice(-10);
 
-    // Accept phone if ending in 8008413774 or matches config or input is valid length
-    const isPhoneMatch = !cleanInputPhone || last10Input === last10Config || last10Input === '8008413774' || cleanInputPhone.length >= 10;
-
+    const isPhoneMatch = last10Input === last10Config || last10Input === '8008413774';
     const p = (passwordInput || '').trim();
-    // Accept 492006, active password, default password, admin, or any >= 4 chars
-    const isPasswordMatch =
-      p === '492006' ||
-      p === activeConfig.password.trim() ||
-      p === DEFAULT_VENDOR_CREDENTIALS.password ||
-      p === 'admin8008413774' ||
-      p === 'admin' ||
-      p === '123456' ||
-      p === 'admin123' ||
-      p === '8008413774' ||
-      p.length >= 4;
 
-    if (isPhoneMatch && isPasswordMatch) {
+    // Strict security check: password must match active password or initial 492006
+    const isPasswordMatch = p === activeConfig.password.trim() || p === '492006';
+
+    if (isPhoneMatch && isPasswordMatch && p.length > 0) {
       const vendorProfile: UserProfile = {
         uid: 'vendor_' + (activeConfig.phone || '8008413774'),
         name: activeConfig.name || 'Sri Tirumala Store Owner',
@@ -164,7 +147,7 @@ export const authService = {
 
     return {
       success: false,
-      message: 'Please enter your password "492006".',
+      message: 'Access Denied: Incorrect phone number or password.',
     };
   },
 

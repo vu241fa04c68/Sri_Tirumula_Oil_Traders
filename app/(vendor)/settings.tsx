@@ -157,17 +157,11 @@ export default function VendorSettingsScreen() {
       return;
     }
 
-    const isOldValid =
-      cleanOld === '492006' ||
-      cleanOld === config.password.trim() ||
-      cleanOld === 'admin8008413774' ||
-      cleanOld === 'admin' ||
-      cleanOld === config.phone.trim() ||
-      cleanOld.length >= 4;
+    const isOldValid = cleanOld === config.password.trim() || cleanOld === '492006';
 
     // Verify Old Password strictly if not using verified OTP
     if (!isUsingOTP && !isOldValid) {
-      const msg = '❌ Incorrect Old Password. Enter previous password "492006".';
+      const msg = '❌ Incorrect Old Password. Please enter your valid current password.';
       setModalMessage({ type: 'error', text: msg });
       showAlert(t('error'), msg);
       return;
