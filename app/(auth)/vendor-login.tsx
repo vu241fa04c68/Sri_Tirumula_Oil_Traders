@@ -213,8 +213,8 @@ export default function VendorLoginScreen() {
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry={!showMainPassword}
-                placeholder="Enter password"
-                placeholderTextColor="#888888"
+                placeholder="Enter the password"
+                placeholderTextColor="#666666"
               />
               <TouchableOpacity onPress={() => setShowMainPassword(!showMainPassword)} style={styles.eyeBtn}>
                 <Ionicons name={showMainPassword ? 'eye-off' : 'eye'} size={20} color={COLORS.textMuted} />
@@ -222,10 +222,10 @@ export default function VendorLoginScreen() {
             </View>
           </View>
 
-          {/* Forgot Password Link - asks for previous password */}
+          {/* Forgot Password Link */}
           <TouchableOpacity style={styles.forgotBtn} onPress={handleOpenForgotModal}>
             <Ionicons name="key-outline" size={16} color={COLORS.primary} style={{ marginRight: 4 }} />
-            <Text style={styles.forgotBtnText}>Forgot Password? (Requires Previous Password)</Text>
+            <Text style={styles.forgotBtnText}>Forgot Password?</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.submitBtn} onPress={handleVendorLogin} disabled={isLoading}>
