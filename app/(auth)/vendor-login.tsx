@@ -200,7 +200,8 @@ export default function VendorLoginScreen() {
               value={phone}
               onChangeText={setPhone}
               keyboardType="phone-pad"
-              placeholder="Authorized Vendor Phone"
+              placeholder="Enter 10-digit mobile number"
+              placeholderTextColor="#888888"
             />
           </View>
 
@@ -212,7 +213,8 @@ export default function VendorLoginScreen() {
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry={!showMainPassword}
-                placeholder="Enter admin password"
+                placeholder="Enter password"
+                placeholderTextColor="#888888"
               />
               <TouchableOpacity onPress={() => setShowMainPassword(!showMainPassword)} style={styles.eyeBtn}>
                 <Ionicons name={showMainPassword ? 'eye-off' : 'eye'} size={20} color={COLORS.textMuted} />
@@ -267,14 +269,15 @@ export default function VendorLoginScreen() {
             <ScrollView showsVerticalScrollIndicator={false}>
               {/* Previous Password Field (MANDATORY) */}
               <View style={styles.inputGroup}>
-                <Text style={styles.label}>Previous Admin Password *</Text>
+                 <Text style={styles.label}>Previous Admin Password *</Text>
                 <View style={styles.passwordWrapper}>
                   <TextInput
                     style={styles.passwordInput}
                     value={previousPassword}
                     onChangeText={setPreviousPassword}
                     secureTextEntry={!showPrevPass}
-                    placeholder="Enter previous admin password"
+                    placeholder="Enter previous password"
+                    placeholderTextColor="#888888"
                   />
                   <TouchableOpacity onPress={() => setShowPrevPass(!showPrevPass)} style={styles.eyeBtn}>
                     <Ionicons name={showPrevPass ? 'eye-off' : 'eye'} size={20} color={COLORS.textMuted} />
@@ -291,7 +294,8 @@ export default function VendorLoginScreen() {
                     value={newPassword}
                     onChangeText={setNewPassword}
                     secureTextEntry={!showNewPass}
-                    placeholder="Minimum 6 characters"
+                    placeholder="Enter new password (min. 4 characters)"
+                    placeholderTextColor="#888888"
                   />
                   <TouchableOpacity onPress={() => setShowNewPass(!showNewPass)} style={styles.eyeBtn}>
                     <Ionicons name={showNewPass ? 'eye-off' : 'eye'} size={20} color={COLORS.textMuted} />
@@ -308,7 +312,8 @@ export default function VendorLoginScreen() {
                     value={confirmPassword}
                     onChangeText={setConfirmPassword}
                     secureTextEntry={!showConfirmPass}
-                    placeholder="Re-enter new password"
+                    placeholder="Confirm new password"
+                    placeholderTextColor="#888888"
                   />
                   <TouchableOpacity onPress={() => setShowConfirmPass(!showConfirmPass)} style={styles.eyeBtn}>
                     <Ionicons name={showConfirmPass ? 'eye-off' : 'eye'} size={20} color={COLORS.textMuted} />
