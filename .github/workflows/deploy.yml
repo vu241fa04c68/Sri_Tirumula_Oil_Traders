@@ -31,7 +31,9 @@ jobs:
         run: npm ci
 
       - name: Export web static files
-        run: npx expo export -p web
+        run: |
+          npx expo export -p web
+          cp dist/index.html dist/404.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
