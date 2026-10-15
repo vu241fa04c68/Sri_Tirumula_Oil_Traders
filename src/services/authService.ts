@@ -21,7 +21,7 @@ export interface VendorAdminConfig {
 // Initial Default Shop Owner Account Credentials
 export const DEFAULT_VENDOR_CREDENTIALS: VendorAdminConfig = {
   phone: '8008413774',
-  password: 'admin8008413774',
+  password: '492006',
   name: 'Sri Tirumala Store Owner',
 };
 
@@ -48,6 +48,11 @@ export const authService = {
       const saved = await AsyncStorage.getItem('vendor_credentials');
       if (saved) {
         cachedVendorCredentials = JSON.parse(saved);
+        // If password was the old default, ensure 492006 is active
+        if (cachedVendorCredentials?.password === 'admin8008413774') {
+          cachedVendorCredentials.password = '492006';
+          AsyncStorage.setItem('vendor_credentials', JSON.stringify(cachedVendorCredentials));
+        }
         return cachedVendorCredentials!;
       }
     } catch (e) {}
@@ -80,16 +85,18 @@ export const authService = {
     const cleanNew = (newPasswordInput || '').trim();
 
     const isOldValid =
+      cleanOld === '492006' ||
       cleanOld === activeConfig.password.trim() ||
       cleanOld === DEFAULT_VENDOR_CREDENTIALS.password ||
       cleanOld === 'admin' ||
       cleanOld === '8008413774' ||
+      cleanOld === 'admin8008413774' ||
       cleanOld.length >= 4;
 
     if (!cleanOld || !isOldValid) {
       return {
         success: false,
-        message: 'Incorrect previous password. You can enter your current password or default "admin8008413774".',
+        message: 'Incorrect previous password. Please enter previous password "492006".',
       };
     }
 
@@ -132,8 +139,9 @@ export const authService = {
     const isPhoneMatch = !cleanInputPhone || last10Input === last10Config || last10Input === '8008413774' || cleanInputPhone.length >= 10;
 
     const p = (passwordInput || '').trim();
-    // Accept if matches active password, default admin8008413774, admin, or length >= 4
+    // Accept 492006, active password, default password, admin, or any >= 4 chars
     const isPasswordMatch =
+      p === '492006' ||
       p === activeConfig.password.trim() ||
       p === DEFAULT_VENDOR_CREDENTIALS.password ||
       p === 'admin8008413774' ||
@@ -156,7 +164,7 @@ export const authService = {
 
     return {
       success: false,
-      message: 'Please enter your password (e.g. admin8008413774).',
+      message: 'Please enter your password "492006".',
     };
   },
 
